@@ -35,6 +35,7 @@
       },
       "tag": "api"
     },
+# XTLS
     {
       "listen": "::",
       "port": 443,
@@ -117,6 +118,7 @@
         ]
       }
     },
+# TROJAN TCP TLS
     {
       "port": 2323,
       "listen": "127.0.0.1",
@@ -151,6 +153,7 @@
         ]
       }
     },
+# VLESS WS
     {
       "listen": "@vless-ws",
       "protocol": "vless",
@@ -181,6 +184,7 @@
         ]
       }
     },
+# VMESS WS
     {
       "listen": "@vmess-ws",
       "protocol": "vmess",
@@ -210,6 +214,7 @@
         ]
       }
     },
+# TROJAN WS
     {
       "listen": "@trojan-ws",
       "protocol": "trojan",
@@ -238,6 +243,100 @@
         ]
       }
     },
+# SS WS
+    {
+      "listen": "@ss-ws",
+      "protocol": "shadowsocks",
+      "settings": {
+        "clients": [
+            {
+              "method": "aes-256-gcm",
+              "password": "9223b8ce-3e06-44da-8b71-0f258289d442"
+#ss
+            }
+          ],
+        "network": "tcp,udp"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/ss"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# SS2022 WS
+    {
+      "listen": "@ss2022-ws",
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "2022-blake3-aes-128-gcm",
+        "password": "nIrqFdFbBH/XMxucYw+v2g==",
+        "clients": [
+          {
+            "password": "AkcusWx/ltR3EprsEQ7TaA=="
+#ss2022
+          }
+        ],
+        "network": "tcp,udp"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/ss2022"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# SOCKS5 WS
+    {
+      "listen": "@socks5-ws",
+      "protocol": "socks",
+      "settings": {
+        "auth": "password",
+        "accounts": [
+            {
+              "user": "xray",
+              "pass": "core"
+#socks5
+            }
+          ],
+        "udp": true,
+        "ip": "127.0.0.1"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/socks5"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# VLESS GRPC
     {
       "listen": "127.0.0.1",
       "port": 11000,
@@ -267,6 +366,7 @@
         ]
       }
     },
+# VMESS GRPC
     {
       "listen": "127.0.0.1",
       "port": 12000,
@@ -295,6 +395,7 @@
         ]
       }
     },
+# TROJAN GRPC
     {
       "listen": "127.0.0.1",
       "port": 13000,
@@ -312,6 +413,96 @@
         "network": "grpc",
         "grpcSettings": {
           "serviceName": "trojan-grpc"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# SS GRPC
+    {
+      "listen": "127.0.0.1",
+      "port": 14000,
+      "protocol": "shadowsocks",
+      "settings": {
+        "clients": [
+            {
+              "method": "aes-256-gcm",
+              "password": "9223b8ce-3e06-44da-8b71-0f258289d442"
+#ss-grpc
+            }
+          ],
+        "network": "tcp,udp"
+      },
+      "streamSettings":{
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "ss-grpc"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# SS2022 GRPC
+    {
+      "listen": "127.0.0.1",
+      "port": 15000,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "2022-blake3-aes-128-gcm",
+        "password": "nIrqFdFbBH/XMxucYw+v2g==",
+        "clients": [
+          {
+            "password": "AkcusWx/ltR3EprsEQ7TaA=="
+#ss2022-grpc
+          }
+        ],
+        "network": "tcp,udp"
+      },
+      "streamSettings":{
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "ss2022-grpc"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+# SOCKS5 GRPC
+    {
+      "listen": "127.0.0.1",
+      "port": 16000,
+      "protocol": "socks",
+      "settings": {
+        "auth": "password",
+        "accounts": [
+            {
+              "user": "xray",
+              "pass": "core"
+#socks5
+            }
+          ],
+        "udp": true,
+        "ip": "127.0.0.1"
+      },
+      "streamSettings":{
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "socks5-grpc"
         }
       },
       "sniffing": {
@@ -350,6 +541,21 @@
           {
             "path": "/trojan",
             "dest": "@trojan-ws",
+            "xver": 2
+          },
+          {
+            "path": "/ss",
+            "dest": "@ss-ws",
+            "xver": 2
+          },
+          {
+            "path": "/ss2022",
+            "dest": "@ss2022-ws",
+            "xver": 2
+          },
+          {
+            "path": "/socks5",
+            "dest": "@socks5-ws",
             "xver": 2
           }
         ],
