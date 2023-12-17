@@ -20,6 +20,7 @@ apt install socat netfilter-persistent -y
 apt install vnstat lsof fail2ban -y
 apt install curl sudo -y
 apt install screen cron screenfetch -y
+mkdir /backup >> /dev/null 2>&1
 mkdir /user >> /dev/null 2>&1
 mkdir /tmp >> /dev/null 2>&1
 apt install resolvconf network-manager dnsutils bind9 -y
@@ -55,7 +56,7 @@ sudo apt-get install speedtest
 clear
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 apt install nginx -y
-rm -rf /var/www/html/* >> /dev/null 2>&1
+rm /var/www/html/*.html
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 mkdir -p /var/www/html/vmess
@@ -81,15 +82,56 @@ domain=$(cat /usr/local/etc/xray/domain)
 curl https://get.acme.sh | sh
 source ~/.bashrc
 cd .acme.sh
-bash acme.sh --set-default-ca  --server zerossl
-bash acme.sh --register-account -m inibedul@gmail.com --server zerossl
-bash acme.sh --issue -d $domain --server zerossl --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
+bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
 chmod 745 /usr/local/etc/xray/private.key
 clear
 echo -e "${GB}[ INFO ]${NC} ${YB}Setup Nginx & Xray Conf${NC}"
 wget -q -O /usr/local/etc/xray/config.json https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/config.json
 wget -q -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/nginx.conf
-wget -q -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/xray.conf
+domain=$(cat /usr/local/etc/xray/domain)
+cat > /etc/nginx/conf.d/xray.conf << END
+server {
+    listen 8880 proxy_protocol default_server;
+    listen 8443 http2 proxy_protocol default_server;
+    set_real_ip_from 127.0.0.1;
+    real_ip_header proxy_protocol;
+    root /var/www/html;
+    server_name $domain;
+    }
+END
+sed -i '$ igrpc_read_timeout 1h;' /etc/nginx/conf.d/xray.conf
+sed -i '$ igrpc_send_timeout 1h;' /etc/nginx/conf.d/xray.conf
+sed -i '$ igrpc_set_header X-Real-IP $remote_addr;' /etc/nginx/conf.d/xray.conf
+
+sed -i '$ ilocation /vless-grpc {' /etc/nginx/conf.d/xray.conf
+sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
+sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
+sed -i '$ igrpc_pass grpc://127.0.0.1:11000;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+
+sed -i '$ ilocation /vmess-grpc {' /etc/nginx/conf.d/xray.conf
+sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
+sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
+sed -i '$ igrpc_pass grpc://127.0.0.1:12000;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+
+sed -i '$ ilocation /trojan-grpc {' /etc/nginx/conf.d/xray.conf
+sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
+sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
+sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
+sed -i '$ igrpc_pass grpc://127.0.0.1:13000;' /etc/nginx/conf.d/xray.conf
+sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 systemctl restart nginx
 systemctl restart xray
 echo -e "${GB}[ INFO ]${NC} ${YB}Setup Done${NC}"
@@ -229,7 +271,7 @@ echo -e "  ${YB}- Vless XTLS Vision${NC}"
 echo -e "  ${YB}- Vless WS CDN TLS${NC}"
 echo -e "  ${YB}- Vless WS CDN${NC}"
 echo -e "  ${YB}- Vless gRPC${NC}"
-echo -e "  ${YB}- Trojan TCP${NC}"
+echo -e "  ${YB}- Trojan TCP TLS${NC}"
 echo -e "  ${YB}- Trojan WS CDN TLS${NC}"
 echo -e "  ${YB}- Trojan WS CDN${NC}"
 echo -e "  ${YB}- Trojan gRPC${NC}"
