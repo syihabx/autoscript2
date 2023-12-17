@@ -43,8 +43,7 @@
         "clients": [
           {
             "flow": "xtls-rprx-vision",
-            "id": "9223b8ce-3e06-44da-8b71-0f258289d442",
-            "level": 0
+            "id": "9223b8ce-3e06-44da-8b71-0f258289d442"
 #vless-xtls
           }
         ],
@@ -72,6 +71,21 @@
           {
             "path": "/trojan",
             "dest": "@trojan-ws",
+            "xver": 2
+          },
+          {
+            "path": "/ss",
+            "dest": "@ss-ws",
+            "xver": 2
+          },
+          {
+            "path": "/ss2022",
+            "dest": "@ss2022-ws",
+            "xver": 2
+          },
+          {
+            "path": "/socks5",
+            "dest": "@socks5-ws",
             "xver": 2
           }
         ]
@@ -144,8 +158,7 @@
         "clients": [
           {
             "email":"general@vless-ws",
-            "id": "9223b8ce-3e06-44da-8b71-0f258289d442",
-            "level": 0
+            "id": "9223b8ce-3e06-44da-8b71-0f258289d442"
 #vless
 
           }
@@ -233,8 +246,7 @@
         "clients": [
           {
             "email":"general@vless-grpc",
-            "id": "9223b8ce-3e06-44da-8b71-0f258289d442",
-            "level": 0
+            "id": "9223b8ce-3e06-44da-8b71-0f258289d442"
 #vless-grpc
 
           }
