@@ -77,7 +77,8 @@ case $opt in
 5) clear ; ss2022 ;;
 6) clear ; allxray ;;
 7) clear ; log-create ;;
-8) clear ; speedtest ;;
+8) clear ; speedtest ; echo " " ; read -n 1 -s -r -p "Press any key to back on
+menu" ; menu ;;
 9) clear ; dns ;;
 10) clear ; certxray ;;
 11) clear ; about ;;
