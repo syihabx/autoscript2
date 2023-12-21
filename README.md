@@ -1,5 +1,6 @@
-# Autoscript
+# Autoscript | Free To Use For All
 Tolong di Fork atau "use this template" 🙏🙏
+Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 
 |  SERVICE  |  PORT  |
 |---------- |--------|
