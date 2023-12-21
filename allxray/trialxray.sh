@@ -99,9 +99,9 @@ trojanlink4="trojan://$pwtr@$domain:443?security=tls&type=tcp&sni=$domain#$user"
 
 echo -n "$cipher:$pwss" | base64 -w 0 > /tmp/log
 ss_base64=$(cat /tmp/log)
-shadowsockslink1="ss://${ss_base64}@$domain:443?path=/shadowsocks&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
-shadowsockslink2="ss://${ss_base64}@$domain:80?path=/shadowsocks&security=none&host=${domain}&type=ws#${user}"
-shadowsockslink3="ss://${ss_base64}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=shadowsocks-grpc&sni=$domain#${user}"
+shadowsockslink1="ss://${ss_base64}@$domain:443?path=/ss&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+shadowsockslink2="ss://${ss_base64}@$domain:80?path=/ss&security=none&host=${domain}&type=ws#${user}"
+shadowsockslink3="ss://${ss_base64}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=ss-grpc&sni=$domain#${user}"
 rm -rf /tmp/log
 
 echo -n "$cipher2:$serverpsk:$userpsk" | base64 -w 0 > /tmp/log
