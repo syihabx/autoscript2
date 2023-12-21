@@ -26,21 +26,20 @@ read -n 1 -s -r -p "Press any key to back on menu"
 add-trojan
 fi
 done
-uuid=$(cat /proc/sys/kernel/random/uuid)
+# uuid=$(cat /proc/sys/kernel/random/uuid)
+pwtr=$(openssl rand -hex 4)
 read -p "Expired (days): " masaaktif
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
-sed -i '/#universal$/a\#& '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
 sed -i '/#trojan$/a\#& '"$user $exp"'\
-},{"password": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
+},{"password": "'""$pwtr""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
 sed -i '/#trojan-tcp$/a\#& '"$user $exp"'\
-},{"password": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
+},{"password": "'""$pwtr""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
 sed -i '/#trojan-grpc$/a\#& '"$user $exp"'\
-},{"password": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
-trojanlink1="trojan://$uuid@$domain:443?path=/trojan&security=tls&host=$domain&type=ws&sni=$domain#$user"
-trojanlink2="trojan://${uuid}@$domain:80?path=/trojan&security=none&host=$domain&type=ws#$user"
-trojanlink3="trojan://${uuid}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=trojan-grpc&sni=$domain#$user"
-trojanlink4="trojan://${uuid}@$domain:443?security=tls&type=tcp&sni=$domain#$user"
+},{"password": "'""$pwtr""'","email": "'""$user""'"' /usr/local/etc/xray/config.json
+trojanlink1="trojan://$pwtr@$domain:443?path=/trojan&security=tls&host=$domain&type=ws&sni=$domain#$user"
+trojanlink2="trojan://${pwtr}@$domain:80?path=/trojan&security=none&host=$domain&type=ws#$user"
+trojanlink3="trojan://${pwtr}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=trojan-grpc&sni=$domain#$user"
+trojanlink4="trojan://${pwtr}@$domain:443?security=tls&type=tcp&sni=$domain#$user"
 cat > /var/www/html/trojan/trojan-$user.txt << END
 ==========================
     Trojan WS (CDN) TLS
@@ -49,7 +48,7 @@ cat > /var/www/html/trojan/trojan-$user.txt << END
   server: $domain
   port: 443
   type: trojan
-  password: $uuid
+  password: $pwtr
   network: ws
   servername: $domain
   skip-cert-verify: true
@@ -65,7 +64,7 @@ cat > /var/www/html/trojan/trojan-$user.txt << END
   server: $domain
   port: 443
   type: trojan
-  password: $uuid
+  password: $pwtr
   network: grpc
   servername: $domain
   skip-cert-verify: true
@@ -79,20 +78,20 @@ cat > /var/www/html/trojan/trojan-$user.txt << END
   server: $domain
   port: 443
   type: trojan
-  password: $uuid
+  password: $pwtr
   skip-cert-verify: true
   servername: $domain
   udp: true
 ==========================
     Link Trojan Account
 ==========================
-Link TLS  : trojan://$uuid@$domain:443?path=/trojan&security=tls&host=$domain&type=ws&sni=$domain#$user
+Link TLS  : trojan://$pwtr@$domain:443?path=/trojan&security=tls&host=$domain&type=ws&sni=$domain#$user
 ==========================
-Link NTLS : trojan://${uuid}@$domain:80?path=/trojan&security=none&host=$domain&type=ws#$user
+Link NTLS : trojan://${pwtr}@$domain:80?path=/trojan&security=none&host=$domain&type=ws#$user
 ==========================
-Link gRPC : trojan://${uuid}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=trojan-grpc&sni=$domain#$user
+Link gRPC : trojan://${pwtr}@$domain:443?security=tls&encryption=none&type=grpc&serviceName=trojan-grpc&sni=$domain#$user
 ==========================
-Link TCP : trojan://${uuid}@$domain:443?security=tls&type=tcp&sni=$domain#$user
+Link TCP : trojan://${pwtr}@$domain:443?security=tls&type=tcp&sni=$domain#$user
 ==========================
 END
 ISP=$(cat /usr/local/etc/xray/org)
@@ -109,7 +108,7 @@ echo -e "Host/IP       : ${domain}" | tee -a /user/log-trojan-$user.txt
 echo -e "Port TLS      : 443" | tee -a /user/log-trojan-$user.txt
 echo -e "Port NTLS     : 80" | tee -a /user/log-trojan-$user.txt
 echo -e "Port gRPC     : 443" | tee -a /user/log-trojan-$user.txt
-echo -e "Password      : ${uuid}" | tee -a /user/log-trojan-$user.txt
+echo -e "Password      : ${pwtr}" | tee -a /user/log-trojan-$user.txt
 echo -e "Network       : TCP, Websocket, gRPC" | tee -a /user/log-trojan-$user.txt
 echo -e "Path          : /trojan" | tee -a /user/log-trojan-$user.txt
 echo -e "ServiceName   : trojan-grpc" | tee -a /user/log-trojan-$user.txt
