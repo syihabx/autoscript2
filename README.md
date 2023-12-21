@@ -14,6 +14,12 @@ Tolong di Fork atau "use this template" 🙏🙏
 | Trojan WS CDN | 80 |
 | Trojan TCP TLS| 443 |
 | Trojan gRPC  | 443 |
+| Shadowsocks WS CDN TLS | 443 |
+| Shadowsocks WS CDN | 80 |
+| Shadowsocks gRPC  | 443 |
+| Shadowsocks 2022 WS CDN TLS | 443 |
+| Shadowsocks 2022 WS CDN | 80 |
+| Shadowsocks 2022 gRPC  | 443 |
 | Nginx | 443 |
 | Auto Delete Expired User| ✅ |
 | DNS Setting | ✅ |
