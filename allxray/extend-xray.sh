@@ -53,5 +53,5 @@ echo -e "${BB}——————————————————————
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 clear
-vmess
+allxray
 fi
