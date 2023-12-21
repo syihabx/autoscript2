@@ -53,18 +53,18 @@ echo -e "    ${GB}≈ Total: $ttoday          ≈ Total: $tmon${NC}   "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                ${WB}----- [ Xray Menu ] -----${NC}               "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
-echo -e " ${MB}[1]${NC} ${YB}Vmess Menu${NC}"
-echo -e " ${MB}[2]${NC} ${YB}Vless Menu${NC}"
+echo -e " ${MB}[1]${NC} ${YB}Vmess Menu${NC}          ${MB}[5]${NC} ${YB}Shadowsocks 2022 Menu${NC}"
+echo -e " ${MB}[2]${NC} ${YB}Vless Menu${NC}          ${MB}[6]${NC} ${YB}All Xray Menu${NC}"
 echo -e " ${MB}[3]${NC} ${YB}Trojan Menu${NC}"
-echo -e " ${MB}[4]${NC} ${YB}Allxray Menu${NC}"
+echo -e " ${MB}[4]${NC} ${YB}Shadowsocks Menu${NC}"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                 ${WB}----- [ Utility ] -----${NC}                "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
-echo -e " ${MB}[5]${NC} ${YB}Log Create Account${NC}  ${MB}[10]${NC} ${YB}DNS Setting${NC}"
-echo -e " ${MB}[6]${NC} ${YB}Speedtest${NC}           ${MB}[11]${NC} ${YB}Check DNS Status${NC}"
-echo -e " ${MB}[7]${NC} ${YB}Change Domain${NC}"
-echo -e " ${MB}[8]${NC} ${YB}Cert Acme.sh${NC}"
-echo -e " ${MB}[9]${NC} ${YB}About Script${NC}"
+echo -e " ${MB}[7]${NC} ${YB}Log Create Account${NC}  ${MB}[12]${NC} ${YB}DNS Setting${NC}"
+echo -e " ${MB}[8]${NC} ${YB}Speedtest${NC}           ${MB}[13]${NC} ${YB}Check DNS Status${NC}"
+echo -e " ${MB}[9]${NC} ${YB}Change Domain${NC}"
+echo -e " ${MB}[10]${NC} ${YB}Cert Acme.sh${NC}"
+echo -e " ${MB}[11]${NC} ${YB}About Script${NC}"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e ""
 read -p " Select Menu :  "  opt
@@ -73,14 +73,16 @@ case $opt in
 1) clear ; vmess ;;
 2) clear ; vless ;;
 3) clear ; trojan ;;
-4) clear ; allxray ;;
-5) clear ; log-create ;;
-6) clear ; speedtest ;;
-7) clear ; dns ;;
-8) clear ; certxray ;;
-9) clear ; about ;;
-10) clear ; changer ;;
-11) clear ;
+4) clear ; shadowsocks ;;
+5) clear ; ss2022 ;;
+6) clear ; allxray ;;
+7) clear ; log-create ;;
+8) clear ; speedtest ;;
+9) clear ; dns ;;
+10) clear ; certxray ;;
+11) clear ; about ;;
+12) clear ; changer ;;
+13) clear ;
 resolvectl status
 echo ""
 echo ""
