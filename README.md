@@ -20,7 +20,7 @@ Tolong di Fork atau "use this template" 🙏🙏
 | Shadowsocks 2022 WS CDN TLS | 443 |
 | Shadowsocks 2022 WS CDN | 80 |
 | Shadowsocks 2022 gRPC  | 443 |
-| Nginx | 800,844 |
+| Nginx | 800, 844 |
 | Auto Delete Expired User| ✅ |
 | DNS Setting | ✅ |
 
