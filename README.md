@@ -29,3 +29,5 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 ```
 wget -O xray s.id/1YIob && chmod +x xray && ./xray
 ```
+# Screenshot
+![a](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/a%20(1).png)
