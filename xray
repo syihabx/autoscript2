@@ -1077,7 +1077,7 @@ END
 chmod 644 /root/.profile
 clear
 echo ""
-echo ""echo -e "${BB}—————————————————————————————————————————————————————————${NC}"
+echo -e "${BB}—————————————————————————————————————————————————————————${NC}"
 echo -e "                  ${WB}XRAY SCRIPT BY DUGONG${NC}"
 echo -e "${BB}—————————————————————————————————————————————————————————${NC}"
 echo -e "                 ${WB}»»» Protocol Service «««${NC}  "
