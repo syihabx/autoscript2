@@ -224,7 +224,7 @@ cat > /usr/local/etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "password": "$uuid",
+            "password": "$pwtr",
             "level": 0
 #trojan-tcp
           }
