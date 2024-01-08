@@ -28,7 +28,7 @@ echo -e " ${MB}[10]${NC} ${YB}Custom DNS${NC}"
 echo -e ""
 echo -e " ${MB}[11]${NC} ${YB}Back To Main Menu${NC}"
 echo ""
-read -p "Select From Options [ 1 - 9 ] : " dns
+read -p "Select From Options [ 1 - 11 ] : " dns
 echo -e ""
 case $dns in
 1) clear ;
