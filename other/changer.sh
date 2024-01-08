@@ -23,9 +23,10 @@ echo -e " ${MB}[5]${NC} ${YB}Level 3 DNS${NC}"
 echo -e " ${MB}[6]${NC} ${YB}Freenom World DNS${NC}"
 echo -e " ${MB}[7]${NC} ${YB}Neustar DNS${NC}"
 echo -e " ${MB}[8]${NC} ${YB}AdGuard DNS${NC}"
-echo -e " ${MB}[9]${NC} ${YB}Custom DNS${NC}"
+echo -e " ${MB}[9]${NC} ${YB}Control D DNS${NC}"
+echo -e " ${MB}[10]${NC} ${YB}Custom DNS${NC}"
 echo -e ""
-echo -e " ${MB}[10]${NC} ${YB}Back To Main Menu${NC}"
+echo -e " ${MB}[11]${NC} ${YB}Back To Main Menu${NC}"
 echo ""
 read -p "Select From Options [ 1 - 9 ] : " dns
 echo -e ""
@@ -152,6 +153,21 @@ echo -e "${YB}Setup Completed${NC}"
 sleep 1.5 ; clear ; changer ;;
 9) clear ;
 echo -e " "
+echo -e "${YB}Setup Control D DNS${NC}"
+cat > /etc/systemd/resolved.conf << END
+[Resolve]
+DNS=76.76.2.43 76.76.10.43
+Domains=~.
+ReadEtcHosts=yes
+END
+systemctl restart resolvconf
+systemctl restart systemd-resolved
+systemctl restart NetworkManager
+echo "Control D DNS" > /user/current
+echo -e "${YB}Setup Completed${NC}"
+sleep 1.5 ; clear ; changer ;;
+10) clear ;
+echo -e " "
 read -p "Please Insert Custom DNS (IPv4 Only): " custom
 if [ -z $custom ]; then
 echo " "
@@ -173,6 +189,6 @@ systemctl restart NetworkManager
 echo "Custom DNS" > /user/current
 echo -e "${YB}Setup Completed${NC}"
 sleep 1.5 ; clear ; changer ;;
-10) clear ; menu ;;
+11) clear ; menu ;;
 *) echo -e "${YB}Please enter an correct number${NC}" ; sleep 1 ; changer ;;
 esac
