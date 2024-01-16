@@ -27,7 +27,8 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 
 # Link Instalasi
 ```
-wget -O xray s.id/1YIob && chmod +x xray && ./xray
+bash -c "$(wget -qO- s.id/1YIob)"
 ```
+*Only Ubuntu Minimal Ver 20.04
 # Screenshot
 ![a](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/a%20(1).png)
