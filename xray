@@ -183,11 +183,6 @@ cat > /usr/local/etc/xray/config.json << END
             "path": "/ss2022",
             "dest": "110",
             "xver": 2
-          },
-          {
-            "path": "/socks5",
-            "dest": "120",
-            "xver": 2
           }
         ]
       },
@@ -406,39 +401,6 @@ cat > /usr/local/etc/xray/config.json << END
         ]
       }
     },
-# SOCKS5 WS
-    {
-      "listen": "127.0.0.1",
-      "port": "120",
-      "protocol": "socks",
-      "settings": {
-        "auth": "password",
-        "accounts": [
-            {
-              "user": "xray",
-              "pass": "core"
-#socks5
-            }
-          ],
-        "udp": true,
-        "ip": "127.0.0.1"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "acceptProxyProtocol": true,
-          "path": "/socks5"
-        }
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
 # VLESS GRPC
     {
       "listen": "127.0.0.1",
@@ -585,37 +547,6 @@ cat > /usr/local/etc/xray/config.json << END
         ]
       }
     },
-# SOCKS5 GRPC
-    {
-      "listen": "127.0.0.1",
-      "port": 16000,
-      "protocol": "socks",
-      "settings": {
-        "auth": "password",
-        "accounts": [
-            {
-              "user": "xray",
-              "pass": "core"
-#socks5
-            }
-          ],
-        "udp": true,
-        "ip": "127.0.0.1"
-      },
-      "streamSettings":{
-        "network": "grpc",
-        "grpcSettings": {
-          "serviceName": "socks5-grpc"
-        }
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
     {
       "port": 80,
       "protocol": "vless",
@@ -637,10 +568,6 @@ cat > /usr/local/etc/xray/config.json << END
           },
           {
             "dest": 210,
-            "xver": 2
-          },
-          {
-            "dest": 220,
             "xver": 2
           },
           {
@@ -750,39 +677,6 @@ cat > /usr/local/etc/xray/config.json << END
         "wsSettings": {
           "acceptProxyProtocol": true,
           "path": "/ss2022"
-        }
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-# SOCKS5 WS
-    {
-      "listen": "127.0.0.1",
-      "port": "220",
-      "protocol": "socks",
-      "settings": {
-        "auth": "password",
-        "accounts": [
-            {
-              "user": "xray",
-              "pass": "core"
-#socks5
-            }
-          ],
-        "udp": true,
-        "ip": "127.0.0.1"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "acceptProxyProtocol": true,
-          "path": "/socks5"
         }
       },
       "sniffing": {
