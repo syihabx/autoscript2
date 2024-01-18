@@ -22,27 +22,6 @@ apt install curl sudo -y
 apt install screen cron screenfetch -y
 mkdir /user >> /dev/null 2>&1
 mkdir /tmp >> /dev/null 2>&1
-apt install resolvconf network-manager dnsutils bind9 -y
-cat > /etc/systemd/resolved.conf << END
-[Resolve]
-DNS=8.8.8.8 8.8.4.4
-Domains=~.
-ReadEtcHosts=yes
-END
-systemctl enable resolvconf
-systemctl enable systemd-resolved
-systemctl enable NetworkManager
-rm -rf /etc/resolv.conf
-rm -rf /etc/resolvconf/resolv.conf.d/head
-echo "
-nameserver 127.0.0.53
-" >> /etc/resolv.conf
-echo "
-" >> /etc/resolvconf/resolv.conf.d/head
-systemctl restart resolvconf
-systemctl restart systemd-resolved
-systemctl restart NetworkManager
-echo "Google DNS" > /user/current
 rm /usr/local/etc/xray/city >> /dev/null 2>&1
 rm /usr/local/etc/xray/org >> /dev/null 2>&1
 rm /usr/local/etc/xray/timezone >> /dev/null 2>&1
@@ -841,94 +820,25 @@ cat > /usr/local/etc/xray/config.json << END
 }
 END
 wget -q -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/nginx.conf
+wget -q -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/xray.conf
 domain=$(cat /usr/local/etc/xray/domain)
-cat > /etc/nginx/conf.d/xray.conf << END
-server {
-    listen 800 proxy_protocol default_server;
-    listen 844 http2 proxy_protocol default_server;
-    set_real_ip_from 127.0.0.1;
-    real_ip_header proxy_protocol;
-    root /var/www/html;
-    server_name $domain;
-    }
-END
-sed -i '$ igrpc_read_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_send_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_set_header X-Real-IP $remote_addr;' /etc/nginx/conf.d/xray.conf
-
-sed -i '$ ilocation /vless-grpc {' /etc/nginx/conf.d/xray.conf
-sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
-sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_pass grpc://127.0.0.1:11000;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-
-sed -i '$ ilocation /vmess-grpc {' /etc/nginx/conf.d/xray.conf
-sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
-sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_pass grpc://127.0.0.1:12000;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-
-sed -i '$ ilocation /trojan-grpc {' /etc/nginx/conf.d/xray.conf
-sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
-sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_pass grpc://127.0.0.1:13000;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-
-sed -i '$ ilocation /ss-grpc {' /etc/nginx/conf.d/xray.conf
-sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
-sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_pass grpc://127.0.0.1:14000;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-
-sed -i '$ ilocation /ss2022-grpc {' /etc/nginx/conf.d/xray.conf
-sed -i '$ iif ($request_method != "POST") {' /etc/nginx/conf.d/xray.conf
-sed -i '$ ireturn 404;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_buffer_size 1m;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_body_timeout 1h;' /etc/nginx/conf.d/xray.conf
-sed -i '$ iclient_max_body_size 0;' /etc/nginx/conf.d/xray.conf
-sed -i '$ igrpc_pass grpc://127.0.0.1:15000;' /etc/nginx/conf.d/xray.conf
-sed -i '$ i}' /etc/nginx/conf.d/xray.conf
+sudo sed -i -e 's/example.com/${domain}/g' /etc/nginx/conf.d/xray.conf
 systemctl restart nginx
 systemctl restart xray
 echo -e "${GB}[ INFO ]${NC} ${YB}Setup Done${NC}"
 sleep 1
 clear
-iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
-iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
-iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
-iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
-iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
-iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
-iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
-iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
-iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
-iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
-iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
-iptables-save > /etc/iptables.up.rules
-iptables-restore -t < /etc/iptables.up.rules
-netfilter-persistent save
-netfilter-persistent reload
+# Blokir lalu lintas torrent (BitTorrent)
+sudo iptables -A INPUT -p udp --dport 6881:6889 -j DROP
+sudo iptables -A INPUT -p tcp --dport 6881:6889 -j DROP
+# Blokir lalu lintas torrent dengan modul string
+sudo iptables -A INPUT -p tcp --dport 6881:6889 -m string --algo bm --string "BitTorrent" -j DROP
+sudo iptables -A INPUT -p udp --dport 6881:6889 -m string --algo bm --string
+"BitTorrent" -j DROP
 cd /usr/bin
 GITHUB=raw.githubusercontent.com/dugong-lewat/autoscript2/main
 echo -e "${GB}[ INFO ]${NC} ${YB}Downloading Main Menu${NC}"
-wget -q -O menu "https://${GITHUB}/menu/menu.sh"
+wget -q -O menu "https://${GITHUB}/menu/menu2.sh"
 wget -q -O vmess "https://${GITHUB}/menu/vmess.sh"
 wget -q -O vless "https://${GITHUB}/menu/vless.sh"
 wget -q -O trojan "https://${GITHUB}/menu/trojan.sh"
