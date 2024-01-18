@@ -25,9 +25,14 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 | DNS Setting | ✅ |
 
 # Link Instalasi
+menggunakan DNS Setting
+*Only Ubuntu Min Ver 20.04
 ```
 bash -c "$(wget -qO- s.id/1YIob)"
 ```
-*Only Ubuntu Minimal Ver 20.04
+tanpa menggunakan DNS Setting
+```
+bash -c "$(wget -qO- s.id/20rns)"
+```
 # Screenshot
 ![a](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/a%20(1).png)
