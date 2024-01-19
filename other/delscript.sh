@@ -99,6 +99,8 @@ sudo apt --fix-broken install
 sudo dpkg --configure -a
 sudo apt update
 sudo apt upgrade
-sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config
-
-echo -e "${YB}Script Deleted${NC}"
+sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config -y
+apt autoremove -y
+echo "${YB}Script Deleted${NC}"
+sleep 3
+reboot
