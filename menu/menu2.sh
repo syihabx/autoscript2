@@ -81,7 +81,7 @@ case $opt in
 9) clear ; dns ;;
 10) clear ; certxray ;;
 11) clear ; about ;;
-12) clear ; delscript ; echo -e "${YB}Script Deleted${NC}" ;;
+12) clear ; delscript ;;
 13) clear ; rescript ;;
 x) exit ;;
 *) echo -e "${YB}salah input${NC}" ; sleep 1 ; menu ;;
