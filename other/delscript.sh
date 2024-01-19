@@ -9,7 +9,6 @@ CB='\e[35;1m'
 WB='\e[37;1m'
 
 rm -rf /user >> /dev/null 2>&1
-rm -rf /tmp >> /dev/null 2>&1
 rm /usr/local/etc/xray/city >> /dev/null 2>&1
 rm /usr/local/etc/xray/org >> /dev/null 2>&1
 rm /usr/local/etc/xray/timezone >> /dev/null 2>&1
@@ -94,12 +93,12 @@ fi
 mesg n || true
 END
 chmod 644 /root/.profile
-sudo apt --fix-broken install
-sudo dpkg --configure -a
 sudo rm -rf /tmp/*
 sudo chmod 1777 /tmp
+sudo apt --fix-broken install
+sudo dpkg --configure -a
 sudo apt update
 sudo apt upgrade
 sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config
-echo " "
+
 echo "${YB}Script Deleted${NC}"
