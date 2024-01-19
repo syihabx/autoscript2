@@ -8,7 +8,7 @@ MB='\e[35;1m'
 CB='\e[35;1m'
 WB='\e[37;1m'
 
-echo "${YB}[ WARNING ] All users will be deleted (Y/N)${NC} "
+echo -e "${YB}[ WARNING ] All users will be deleted (Y/N)${NC} "
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
