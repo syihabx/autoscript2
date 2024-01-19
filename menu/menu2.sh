@@ -61,8 +61,7 @@ echo -e "${BB}——————————————————————
 echo -e "                 ${WB}----- [ Utility ] -----${NC}                "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e " ${MB}[7]${NC} ${YB}Log Create Account${NC}  ${MB}[12]${NC} ${YB}Delete Script${NC}"
-echo -e " ${MB}[8]${NC} ${YB}Speedtest${NC}           ${MB}[13]${NC}
-${YB}Reinstall Script${NC}"
+echo -e " ${MB}[8]${NC} ${YB}Speedtest${NC}           ${MB}[13]${NC} ${YB}Reinstall Script${NC}"
 echo -e " ${MB}[9]${NC} ${YB}Change Domain${NC}"
 echo -e " ${MB}[10]${NC} ${YB}Cert Acme.sh${NC}"
 echo -e " ${MB}[11]${NC} ${YB}About Script${NC}"
