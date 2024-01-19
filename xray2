@@ -805,6 +805,8 @@ wget -q -O certxray "https://${REPO}/other/certxray.sh"
 wget -q -O about "https://${REPO}/other/about.sh"
 wget -q -O clear-log "https://${REPO}/other/clear-log.sh"
 wget -q -O changer "https://${REPO}/other/changer.sh"
+wget -q -O delscript "https://${REPO}/other/delscript.sh"
+wget -q -O rescript "https://${REPO}/other/rescript.sh"
 echo -e "${GB}[ INFO ]${NC} ${YB}Download All Menu Done${NC}"
 sleep 2
 chmod +x add-vmess
