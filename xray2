@@ -867,6 +867,8 @@ chmod +x certxray
 chmod +x about
 chmod +x clear-log
 chmod +x changer
+chmod +x delscript
+chmod +x restart
 cd
 echo "0 0 * * * root xp" >> /etc/crontab
 echo "*/3 * * * * root clear-log" >> /etc/crontab
