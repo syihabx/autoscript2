@@ -21,7 +21,6 @@ apt install vnstat lsof fail2ban -y
 apt install curl sudo -y
 apt install screen cron screenfetch -y
 mkdir /user >> /dev/null 2>&1
-mkdir /tmp >> /dev/null 2>&1
 rm /usr/local/etc/xray/city >> /dev/null 2>&1
 rm /usr/local/etc/xray/org >> /dev/null 2>&1
 rm /usr/local/etc/xray/timezone >> /dev/null 2>&1
@@ -868,7 +867,7 @@ chmod +x about
 chmod +x clear-log
 chmod +x changer
 chmod +x delscript
-chmod +x rescript
+chmod +x restart
 cd
 echo "0 0 * * * root xp" >> /etc/crontab
 echo "*/3 * * * * root clear-log" >> /etc/crontab
