@@ -101,5 +101,5 @@ sudo chmod 1777 /tmp
 sudo apt update
 sudo apt upgrade
 sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config
-
+echo " "
 echo "${YB}Script Deleted${NC}"
