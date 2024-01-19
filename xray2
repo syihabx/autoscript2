@@ -1,4 +1,4 @@
-rm -rf xray
+rm -rf xray2
 clear
 NC='\e[0m'
 DEFBOLD='\e[39;1m'
@@ -726,8 +726,7 @@ sudo iptables -A INPUT -p udp --dport 6881:6889 -j DROP
 sudo iptables -A INPUT -p tcp --dport 6881:6889 -j DROP
 # Blokir lalu lintas torrent dengan modul string
 sudo iptables -A INPUT -p tcp --dport 6881:6889 -m string --algo bm --string "BitTorrent" -j DROP
-sudo iptables -A INPUT -p udp --dport 6881:6889 -m string --algo bm --string
-"BitTorrent" -j DROP
+sudo iptables -A INPUT -p udp --dport 6881:6889 -m string --algo bm --string "BitTorrent" -j DROP
 cd /usr/bin
 REPO=raw.githubusercontent.com/dugong-lewat/autoscript2/main
 REPO2=raw.githubusercontent.com/dugong-lewat/autoscript2/main2
@@ -907,7 +906,7 @@ echo -e "  ${YB}- Shadowsocks 2022 WS CDN${NC}     : ${YB}80${NC}"
 echo -e "  ${YB}- Shadowsocks 2022 gRPC${NC}       : ${YB}443${NC}"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo ""
-rm -f xray
+rm -f xray2
 secs_to_human "$(($(date +%s) - ${start}))"
 echo -e "${YB}[ WARNING ] reboot now ? (Y/N)${NC} "
 read answer
