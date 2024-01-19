@@ -23,8 +23,7 @@ sudo systemctl stop nginx
 sudo apt-get remove --purge nginx
 sudo rm -rf /etc/nginx >> /dev/null 2>&1
 sudo rm -rf /var/log/nginx >> /dev/null 2>&1
-bash -c "$(curl -L
-https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge
 rm -rf /var/log/xray >> /dev/null 2>&1
 rm -rf /usr/local/etc/xray >> /dev/null 2>&1
 rm -rf ~/.acme.sh >> /dev/null 2>&1
@@ -80,11 +79,10 @@ rm -rf certxray
 rm -rf about
 rm -rf clear-log
 rm -rf changer
-rm -rf delscript
-rm -rf rescript
 cd
 sudo sed -i '/0 0 \* \* \* \* root xp/d' /etc/crontab
 sudo sed -i '/5\/5 \* \* \* \* root clear-log/d' /etc/crontab
+sed -i '/\/root\/.acme.sh\/acme.sh.env/d' ~/.bashrc
 cat > /root/.profile << END
 if [ "$BASH" ]; then
 if [ -f ~/.bashrc ]; then
@@ -94,5 +92,12 @@ fi
 mesg n || true
 END
 chmod 644 /root/.profile
+sudo apt --fix-broken install
+sudo dpkg --configure -a
+sudo rm -rf /tmp/*
+sudo chmod 1777 /tmp
+sudo apt update
+sudo apt upgrade
+sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config
 
-echo -e "${YB}Script Deleted${NC}"
+echo "${YB}Script Deleted${NC}"
