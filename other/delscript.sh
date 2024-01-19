@@ -79,6 +79,8 @@ rm -rf certxray
 rm -rf about
 rm -rf clear-log
 rm -rf changer
+rm -rf delscript
+rm -rf rescript
 cd
 sudo sed -i '/0 0 \* \* \* \* root xp/d' /etc/crontab
 sudo sed -i '/5\/5 \* \* \* \* root clear-log/d' /etc/crontab
