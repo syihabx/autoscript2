@@ -101,4 +101,4 @@ sudo apt update
 sudo apt upgrade
 sudo apt-get upgrade base-files libmm-glib0 modemmanager motd-news-config
 
-echo "${YB}Script Deleted${NC}"
+echo -e "${YB}Script Deleted${NC}"
