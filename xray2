@@ -714,7 +714,7 @@ cat > /usr/local/etc/xray/config.json << END
 END
 wget -q -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/nginx.conf
 wget -q -O /etc/nginx/conf.d/xray.conf https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/config/xray.conf
-sudo sed -i -e 's/example.com/${domain}/g' /etc/nginx/conf.d/xray.conf
+sudo sed -i -e 's/example.com/$domain/g' /etc/nginx/conf.d/xray.conf
 systemctl restart nginx
 systemctl restart xray
 echo -e "${GB}[ INFO ]${NC} ${YB}Setup Done${NC}"
