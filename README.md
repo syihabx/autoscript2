@@ -22,6 +22,8 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 | Shadowsocks 2022 WS CDN | 80 |
 | Shadowsocks 2022 gRPC  | 443 |
 | Nginx| 443 (Reverse Proxy) |
+
+
 |  Feature |
 |---------- |
 | Cloudflare WARP (via WG) auto ON |
