@@ -22,14 +22,12 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 | Shadowsocks 2022 WS CDN | 80 |
 | Shadowsocks 2022 gRPC  | 443 |
 | Nginx| 443 (Reverse Proxy) |
-
+| Auto Delete Expired User| ✅ |
+| DNS Setting | ✅ |
 
 |  Feature |
 |---------- |
 | Cloudflare WARP (via WG) auto ON |
-
-| Auto Delete Expired User| ✅ |
-| DNS Setting | ✅ |
 
 # Link Instalasi
 *Only Ubuntu Min Ver 20.04
