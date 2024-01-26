@@ -27,7 +27,7 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 
 |  Feature |
 |---------- |
-| Cloudflare WARP (via WG) auto ON |
+| Cloudflare WARP (via WG) auto ON [BETA]|
 
 # Link Instalasi
 *Only Ubuntu Min Ver 20.04
