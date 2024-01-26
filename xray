@@ -136,11 +136,8 @@ cat > /usr/local/etc/xray/config.json << END
      "rules": [
         {
            "type": "field",
-           "domain": [
-              "geosite:openai",
-              "geosite:youtube",
-              "geosite:google",
-              "geosite:netflix"
+           "ip": [
+              "0.0.0.0/0"
               ],
               "outboundTag": "WARP"
         }
