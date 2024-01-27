@@ -136,8 +136,11 @@ cat > /usr/local/etc/xray/config.json << END
      "rules": [
         {
            "type": "field",
-           "ip": [
-              "0.0.0.0/0"
+           "domain": [
+              "geosite:openai",
+              "geosite:google",
+              "geosite:youtube",
+              "geosite:netflix"
               ],
               "outboundTag": "WARP"
         }
@@ -721,7 +724,7 @@ cat > /usr/local/etc/xray/config.json << END
     {
        "protocol": "wireguard",
        "settings": {
-          "secretKey": "4At95I5YCoO8we6OR5c7TQQj5QfZUiXesNIPw4lU+GM=",
+          "secretKey": "YHpgLt6nUmkwyZXDgKisaWNUPXcqOQOXbqEkTk+1zlQ=",
           "address": [
              "172.16.0.2/32",
              "2606:4700::/128"
@@ -736,7 +739,7 @@ cat > /usr/local/etc/xray/config.json << END
                       "endpoint": "162.159.192.1:2408"
                 }
               ],
-              "reserved":[122, 167, 35],
+              "reserved":[234, 144, 56],
               "mtu": 1280,
               "domainStrategy": "ForceIPv4v6"
        },
@@ -789,7 +792,7 @@ http {
        listen 844 http2 proxy_protocol default_server;
        set_real_ip_from 127.0.0.1;
        real_ip_header proxy_protocol;
-       server_name _;
+       server_name $domain;
        return 400;
    }
    server {
