@@ -1,7 +1,21 @@
 # Autoscript | Free To Use For All
 Tolong di Fork atau "use this template" 🙏🙏
+
 Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 
+# Feature
+
+Route Traffic via WARP
+
+Daftar Website rute dialihkan ke WARP
+- ChatGPT
+- Google
+- YouTube
+- Netflix
+
+![b](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/Screenshot_20240127-232739%7E2.png)
+
+# Service
 |  SERVICE  |  PORT  |
 |---------- |--------|
 | Vmess WS CDN TLS | 443 |
@@ -25,14 +39,8 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 | Auto Delete Expired User| ✅ |
 | DNS Setting | ✅ |
 
-|  Feature |
-|---------- |
-| Cloudflare WARP (via WG) auto ON [BETA]|
-
 # Link Instalasi
 *Only Ubuntu Min Ver 20.04
 ```
 bash -c "$(wget -qO- s.id/1YIob)"
 ```
-# Screenshot
-![a](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/a%20(1).png)
