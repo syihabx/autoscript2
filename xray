@@ -141,7 +141,8 @@ cat > /usr/local/etc/xray/config.json << END
               "geosite:google",
               "geosite:youtube",
               "geosite:netflix",
-              "geosite:spotify"
+              "geosite:spotify",
+              "geosite:zoom"
               ],
               "outboundTag": "WARP"
         }
