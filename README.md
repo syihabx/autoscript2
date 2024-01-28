@@ -5,7 +5,7 @@ Untuk Shadowsocks rekomendasi menggunakan aplikasi NetMod Syna
 
 # Feature
 
-Route Traffic via WARP
+Route Traffic to WARP
 
 Daftar Website rute dialihkan ke WARP
 - ChatGPT
@@ -13,6 +13,7 @@ Daftar Website rute dialihkan ke WARP
 - YouTube
 - Netflix
 - Spotify
+- Zoom
 
 ![b](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/Screenshot_20240127-232739%7E2.png)
 
