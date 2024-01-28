@@ -729,7 +729,7 @@ cat > /usr/local/etc/xray/config.json << END
           "secretKey": "YHpgLt6nUmkwyZXDgKisaWNUPXcqOQOXbqEkTk+1zlQ=",
           "address": [
              "172.16.0.2/32",
-             "2606:4700::/128"
+             "2606:4700:110:8cc4:4833:e4bb:b6f1:2f77/128"
              ],
              "peers": [
                 {
@@ -738,7 +738,7 @@ cat > /usr/local/etc/xray/config.json << END
                       "0.0.0.0/0",
                       "::/0"
                       ],
-                      "endpoint": "162.159.192.1:2408"
+                      "endpoint": "162.159.192.11:7281"
                 }
               ],
               "reserved":[234, 144, 56],
