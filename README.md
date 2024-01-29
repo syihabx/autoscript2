@@ -47,5 +47,6 @@ Daftar Website rute dialihkan ke WARP
 bash -c "$(wget -qO- s.id/1YIob)"
 ```
 # Donasi
+Donasi untuk perpanjang Layanan WARP+ 😊😊
 
 https://saweria.co/dugonglewat
