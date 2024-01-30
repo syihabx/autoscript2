@@ -14,6 +14,8 @@ Daftar Website rute dialihkan ke WARP
 - Netflix
 - Spotify
 - Zoom
+- Facebook
+- CloudFlare
 
 ![b](https://raw.githubusercontent.com/dugong-lewat/autoscript2/main/Screenshot_20240127-232739%7E2.png)
 
