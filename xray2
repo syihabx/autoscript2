@@ -103,6 +103,31 @@ cat > /usr/local/etc/xray/config.json << END
       "statsOutboundDownlink": true
     }
   },
+  "dns": {
+     "servers": [
+        "https://1.1.1.1/dns-query"
+        ],
+        "queryStrategy": "UseIP"
+  },
+  "routing": {
+     "domainStrategy": "IPIfNonMatch",
+     "rules": [
+        {
+           "type": "field",
+           "domain": [
+              "geosite:openai",
+              "geosite:google",
+              "geosite:youtube",
+              "geosite:netflix",
+              "geosite:spotify",
+              "geosite:zoom",
+              "geosite:facebook",
+              "geosite:cloudflare"
+              ],
+              "outboundTag": "WARP"
+        }
+      ]
+   },
   "inbounds": [
     {
       "listen": "127.0.0.1",
@@ -668,48 +693,41 @@ cat > /usr/local/etc/xray/config.json << END
   ],
   "outbounds": [
     {
-      "tag": "default",
-      "protocol": "freedom"
+       "protocol": "freedom",
+       "settings": {
+          "domainStrategy": "UseIP"
+       },
+       "tag": "direct"
     },
     {
       "protocol": "blackhole",
       "tag": "blocked"
     },
     {
-      "tag": "DNS-Internal",
-      "protocol": "dns",
-      "settings": {
-        "address": "127.0.0.53",
-        "port": 53
-      }
+       "protocol": "wireguard",
+       "settings": {
+          "secretKey": "yD2iamc8Px/vzQh5eXSJP1XG2CTJl+nK+Qf5enmfbFA=",
+          "address": [
+             "172.16.0.2/32",
+             "2606:4700:110:86b8:2bfb:c840:6743:98b2/128"
+             ],
+             "peers": [
+                {
+                   "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                   "allowedIPs": [
+                      "0.0.0.0/0",
+                      "::/0"
+                      ],
+                      "endpoint": "162.159.192.11:7281"
+                }
+              ],
+              "reserved":[148, 253, 57],
+              "mtu": 1280,
+              "domainStrategy": "ForceIPv4v6"
+       },
+       "tag": "WARP"
     }
-  ],
-  "routing": {
-    "domainStrategy": "AsIs",
-    "rules": [
-      {
-        "inboundTag": [
-          "api"
-        ],
-        "outboundTag": "api",
-        "type": "field"
-      },
-      {
-        "type": "field",
-        "outboundTag": "blocked",
-        "ip": [
-          "geoip:private"
-        ]
-      },
-      {
-        "type": "field",
-        "outboundTag": "blocked",
-        "protocol": [
-          "bittorrent"
-        ]
-      }
-    ]
-  }
+  ]
 }
 END
 cat > /etc/nginx/nginx.conf << END
