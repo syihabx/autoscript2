@@ -24,7 +24,12 @@ fi
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting renew cert...${NC} "
 sleep 2
 cd .acme.sh
-bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
+export CF_Key="35151d347cf9ce456d71c5137d550b2138c1f"
+bash acme.sh --issue -d $domain --dns dns_cf --ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --force \
+    --accountemail syihabx@gmail.com \
+    --dns dns_cf \
+    --dnssleep 60 \
+    --reloadcmd "service xray restart"
 echo -e "${GB}[ INFO ]${NC} ${YB}Renew cert done...${NC} "
 sleep 2
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting service $Cek${NC} "
