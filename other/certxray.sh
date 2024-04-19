@@ -13,6 +13,9 @@ sleep 0.5
 systemctl stop nginx
 domain=$(cat /var/lib/dnsvps.conf | cut -d'=' -f2)
 Cek=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
+CF_GlobalKey=""
+CF_AccountEmail=""
+
 if [[ ! -z "$Cek" ]]; then
 sleep 1
 echo -e "${RB}[ WARNING ]${NC} ${YB}Detected port 80 used by $Cek${NC} "
@@ -23,13 +26,47 @@ sleep 1
 fi
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting renew cert...${NC} "
 sleep 2
-cd .acme.sh
-export CF_Key="35151d347cf9ce456d71c5137d550b2138c1f"
-bash acme.sh --issue -d $domain --dns dns_cf --ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --force \
-    --accountemail syihabx@gmail.com \
-    --dns dns_cf \
-    --dnssleep 60 \
-    --reloadcmd "service xray restart"
+LOGD "Please set the API key:"
+        read -p "Input your key here:" CF_GlobalKey
+        LOGD "Your API key is:${CF_GlobalKey}"
+        LOGD "Please set up registered email:"
+        read -p "Input your email here:" CF_AccountEmail
+        LOGD "Your registered email address is:${CF_AccountEmail}"
+        ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+        if [ $? -ne 0 ]; then
+            LOGE "Default CA, Lets'Encrypt fail, script exiting..."
+            exit 1
+        fi
+        export CF_Key="${CF_GlobalKey}"
+        export CF_Email=${CF_AccountEmail}
+        ~/.acme.sh/acme.sh --issue --dns dns_cf -d ${domain} -d *.${domain} --log
+        if [ $? -ne 0 ]; then
+            LOGE "Certificate issuance failed, script exiting..."
+            exit 1
+        else
+            LOGI "Certificate issued Successfully, Installing..."
+        fi
+        ~/.acme.sh/acme.sh --installcert -d ${domain} -d *.${domain} --ca-file /usr/local/etc/xray/ca.cer \
+            --cert-file /usr/local/etc/xray/${domain}.cer --key-file /usr/local/etc/xray/private.key \
+            --fullchain-file /usr/local/etc/xray/fullchain.crt
+        if [ $? -ne 0 ]; then
+            LOGE "Certificate installation failed, script exiting..."
+            exit 1
+        else
+            LOGI "Certificate installed Successfully,Turning on automatic updates..."
+        fi
+        ~/.acme.sh/acme.sh --upgrade --auto-upgrade
+        if [ $? -ne 0 ]; then
+            LOGE "Auto update setup Failed, script exiting..."
+            ls -lah cert
+            chmod 755 $certPath
+            exit 1
+        else
+            LOGI "The certificate is installed and auto-renewal is turned on, Specific information is as follows"
+            ls -lah cert
+            chmod 755 $certPath
+        fi
+
 echo -e "${GB}[ INFO ]${NC} ${YB}Renew cert done...${NC} "
 sleep 2
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting service $Cek${NC} "
