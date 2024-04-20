@@ -25,7 +25,7 @@ echo -e "${GB}[ INFO ]${NC} ${YB}Starting renew cert...${NC} "
 sleep 2
 cd .acme.sh
 bash acme.sh --issue -d $domain --dns dns_cf --server letsencrypt --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --force \
---dns dns_cf --cf-email syihabx@gmail.com --cf-key 35151d347cf9ce456d71c5137d550b2138c1f
+--dns dns_cf --dns dns_cf_email syihabx@gmail.com --dns dns_cf_key 35151d347cf9ce456d71c5137d550b2138c1f
 echo -e "${GB}[ INFO ]${NC} ${YB}Renew cert done...${NC} "
 sleep 2
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting service $Cek${NC} "
