@@ -80,10 +80,19 @@ clear
 systemctl stop nginx
 systemctl stop xray
 domain=$(cat /usr/local/etc/xray/domain)
+CF_GlobalKey="35151d347cf9ce456d71c5137d550b2138c1f"
+CF_AccountEmail="syihabx@gmail.com"
 curl https://get.acme.sh | sh
 source ~/.bashrc
+~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+if [ $? -ne 0 ]; then
+    echo -e "Default CA, Lets'Encrypt fail, script exiting..."
+    exit 1
+fi
+export CF_Key="${CF_GlobalKey}"
+export CF_Email=${CF_AccountEmail}
 cd .acme.sh
-bash acme.sh --issue -d $domain --server letsencrypt --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
+bash acme.sh --issue --dns dns_cf -d $domain --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
 chmod 745 /usr/local/etc/xray/private.key
 clear
 echo -e "${GB}[ INFO ]${NC} ${YB}Setup Nginx & Xray Conf${NC}"
