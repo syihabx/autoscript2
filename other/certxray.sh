@@ -38,9 +38,6 @@ if [ $? -ne 0 ]; then
 fi
 export CF_Key="${CF_GlobalKey}"
 export CF_Email=${CF_AccountEmail}
-cd .acme.sh
-cd .acme.sh
-bash acme.sh --issue --dns dns_cf -d $domain --keylength ec-256 --fullchain-file /usr/local/etc/xray/fullchain.crt --key-file /usr/local/etc/xray/private.key --standalone --force
 echo -e "${GB}[ INFO ]${NC} ${YB}Renew cert done...${NC} "
 sleep 2
 echo -e "${GB}[ INFO ]${NC} ${YB}Starting service $Cek${NC} "
